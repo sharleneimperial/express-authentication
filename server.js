@@ -5,12 +5,10 @@ const app = express();
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('./config/ppConfig');
-
+const isLoggedIn = require('./middleware/isLoggedIn');
 
 const SECRET_SESSION = process.env.SECRET_SESSION;
 console.log(SECRET_SESSION);
-
-
 
 app.set('view engine', 'ejs');
 
@@ -29,14 +27,12 @@ app.use(flash());            // flash middleware
 app.use(passport.initialize());      // Initialize passport
 app.use(passport.session());         // Add a session
 
-
 app.use((req, res, next) => {
   console.log(res.locals);
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
   next();
 });
-
 
 app.get('/', (req, res) => {
   res.render('index');
