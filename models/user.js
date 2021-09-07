@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         validate: {
           len: {
-            arg: [1, 99],
+            args: [1, 99],
             msg: "Name must be between 1 and 99 characters",
           }
         }
